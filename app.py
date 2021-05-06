@@ -18,10 +18,10 @@ with requests.Session() as s:
     df = pd.DataFrame(my_list)
     
 df.to_csv('Motor_Vehicle_Collisions_-_Crashes.csv', index = False)
+usersDf = pd.read_csv('Motor_Vehicle_Collisions_-_Crashes.csv', skiprows=1)
+data = usersDf.dropna(subset = ['LATITUDE', 'LONGITUDE'])
     
-DATA_URL = (
-    "Motor_Vehicle_Collisions_-_Crashes.csv"
-)
+DATA_URL = data
 
 st.title("Motor Vehicle Collisions in New York City")
 st.markdown("This application s a streamlit dashboard that can be used to analyze motor Vehicle Collisions in NYC ðŸ—½")
