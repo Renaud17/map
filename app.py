@@ -4,7 +4,21 @@ import numpy as np
 import pydeck as pdk
 import plotly.express as px
 
+import csv
+import requests
 
+CSV_URL = 'https://cdn-ps-la-1.ufile.io/get/hnbkp59d?token=MmY0ZTk2ZTcxMWEzMWQwYWZiNDZiMTNiODdhMjZmMzAxMDFlNjY0ODQ1Zjc0ODY4N2NkOGFlZjJkZDgzZTllNjAyOWRlZTdlNjczMWQ3ZDFkOWFjYjU2NzQ4ZDJlZjZhM2ExNTgxODM5OTBiNDY4Mjc5OTE1ZDUyZmM4ZjRmMzBRbmVWZlVDeGNTTXJZczNHZ2JralVRZlJIVncxVlBDOEUvY2hPTjMweWMzKzZzRXNJQWkzVjcvQ1FvR3JoaW9Uelc2Nys3eExEUnFRUEFoeDh6S1c5TVN6Tk5MS3lPOFJqWmxlZ0UwTGgrWW1aNWZpdjBzSjI3dXNuWS9oNkNlVHRHVzlpa2tFTWI5M2MvQ3ZHejRBV0E1czBib2VxSWJhanc3WWd2clFyNG1kZTFoeTd0Szk4QkF3R1NnUEg5c3pVNkJ5dUNmZ243ZG94VW5JUG9JL2dHTHBUUmFwN3FwWXZZeUIwWEZseGdJPQ=='
+with requests.Session() as s:
+    download = s.get(CSV_URL)
+
+    decoded_content = download.content.decode('utf-8')
+
+    cr = csv.reader(decoded_content.splitlines(), delimiter=',')
+    my_list = list(cr)
+    df = pd.DataFrame(my_list)
+    
+df.to_csv('Motor_Vehicle_Collisions_-_Crashes.csv', index = False)
+    
 DATA_URL = (
     "Motor_Vehicle_Collisions_-_Crashes.csv"
 )
