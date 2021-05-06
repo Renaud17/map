@@ -17,9 +17,8 @@ with requests.Session() as s:
     my_list = list(cr)
     df = pd.DataFrame(my_list)
     
-df.to_csv('Motor_Vehicle_Collisions_-_Crashes.csv', index = False)
-usersDf = pd.read_csv('Motor_Vehicle_Collisions_-_Crashes.csv', skiprows=1)
-data = usersDf.dropna(subset = ['LATITUDE', 'LONGITUDE'])
+df=df.iloc[1:]
+data = df.dropna(subset = ['LATITUDE', 'LONGITUDE'])
     
 DATA_URL = data
 
